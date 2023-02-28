@@ -1,7 +1,7 @@
 version: "3.5"
 
 services:
-    influxdb:
+    telegraf-secs:
         image: telegraf-secs:20230228
         container_name: solaredge-scraper
         restart: always
@@ -22,3 +22,8 @@ services:
               source: ./telegraf.conf
               target: /etc/telegraf/telegraf.conf
               read_only: true
+            - type: bind
+              source: ./telegraf_history_import.conf
+              target: /etc/telegraf/telegraf_history_import.conf
+              read_only: true
+            - ./:/var/lib/telegraf/mount
